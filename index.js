@@ -4,7 +4,6 @@ var fork = require('child_process').fork
 var exec = require('child_process').exec
 var ps = require('ps-tree')
 var util = require('util')
-var xtend = require('xtend')
 var os = require('os')
 
 var kill = function(pid, sig) {
@@ -113,7 +112,7 @@ Monitor.prototype.start = function() {
     var cmd = typeof self.command === 'function' ? self.command() : self.command
     var child = self.spawnFn(cmd[0], cmd.slice(1), {
       cwd: self.cwd,
-      env: xtend(process.env, self.env),
+      env: self.env,
       uid: self.uid,
       gid: self.gid,
       stdio: self.stdio,
